@@ -6,6 +6,7 @@
 package net.juanxxiii.j23gameengine.gui;
 
 import gameobjects.Spaceship;
+import gameobjects.Tanque;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,6 +26,7 @@ public class JPGameScreen extends javax.swing.JPanel implements Runnable {
 
     BufferedImage bg;//Imagen de fondo
     Spaceship nave;
+    Tanque tanque;
 
     /**
      * Creates new form JPGameScreen
@@ -112,6 +114,8 @@ public class JPGameScreen extends javax.swing.JPanel implements Runnable {
         g2d.drawImage(bg, 0, 0, null);
         //Pinta los elementos
         g2d.drawImage(nave.getNave(), nave.getxNave(), nave.getyNave(), null);
+        //Pintamos los malos
+        tanque.pintar(g2d);
     }
 
     /**
@@ -159,10 +163,13 @@ public class JPGameScreen extends javax.swing.JPanel implements Runnable {
      */
     private void loadResources(){
         try {
-            bg = ImageIO.read(JPGameScreen.class.getResourceAsStream("/assets/bg.jpg"));
+            bg = ImageIO.read(JPGameScreen.class.getResourceAsStream("/assets/room1.png"));
             nave = new Spaceship();
             new Thread(nave).start();
-        } catch (IOException ex) {
+            
+            tanque = new Tanque("tanque.png",10,1,10,100,200);
+            
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
