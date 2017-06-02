@@ -5,7 +5,7 @@
  */
 package net.juanxxiii.j23gameengine.gui;
 
-import gameobjects.Spaceship;
+import gameobjects.Isaac;
 import gameobjects.Tanque;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,7 +25,7 @@ import net.juanxxiii.j23gameengine.util.SoundPlayer;
 public class JPGameScreen extends javax.swing.JPanel implements Runnable {
 
     BufferedImage bg;//Imagen de fondo
-    Spaceship nave;
+    Isaac nave;
     Tanque tanque;
 
     /**
@@ -164,10 +164,11 @@ public class JPGameScreen extends javax.swing.JPanel implements Runnable {
     private void loadResources(){
         try {
             bg = ImageIO.read(JPGameScreen.class.getResourceAsStream("/assets/room1.png"));
-            nave = new Spaceship();
+            nave = new Isaac();
             new Thread(nave).start();
             
             tanque = new Tanque("tanque.png",10,1,10,100,200);
+            new Thread(tanque).start();
             
         } catch (Exception ex) {
             ex.printStackTrace();

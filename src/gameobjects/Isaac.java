@@ -11,7 +11,8 @@ import net.juanxxiii.j23gameengine.gui.JPGameScreen;
  * Nave espacial
  * @author Paniagua
  */
-public class Spaceship implements Runnable{
+public class Isaac implements Runnable{
+    
     private static final int STOP=-1;
     private static final int UP=0;
     private static final int DOWN=1;
@@ -21,18 +22,19 @@ public class Spaceship implements Runnable{
     private int direccion=STOP;
     
     private BufferedImage nave;//Nave espacial
-    private int xNave = 0;//Posición x de la nave
-    private int yNave = 0;//Posición y de la nave
+    public static int xNave = 0;//Posición x de la nave
+    public static int yNave = 0;//Posición y de la nave
     private int speedNave = 3;//Velocidad de la nave
     
-    public Spaceship() throws IOException{
+    public Isaac() throws IOException{
         //Cargamos la imagen
         nave = ImageIO.read(JPGameScreen.class.getResourceAsStream("/assets/isaac_1.png"));
         //Inicializamos posiciones
         xNave = (GameEngine.screenWidth-nave.getWidth())/2;
-        yNave = GameEngine.screenHeight-nave.getHeight()*2;
+        yNave = GameEngine.screenHeight-nave.getHeight()*8;
     }
-
+    
+    
     public BufferedImage getNave() {
         return nave;
     }
@@ -81,22 +83,35 @@ public class Spaceship implements Runnable{
     public void stop(){
         direccion=STOP;
     }
-
+    public void coordIsaac(){
+        System.out.println(yNave+xNave);
+    }
+    
     @Override
     public void run() {
+
         while (true){
+            
+            
             switch(direccion){
                 case UP:
                     yNave--;
+         
+                    //datosProta(xNave,yNave);
+                    //System.out.println("Arriba y"+yNave);
+                  
                     break;
                 case DOWN:
                     yNave++;
+                    //System.out.println("Abajo y"+yNave);
                     break;
                 case RIGHT:
                     xNave++;
+                   // System.out.println("Derecha x"+xNave);
                     break;
                 case LEFT:
                     xNave--;
+                   // System.out.println("Izquierda x"+xNave);
                     break;
             }
             try {
@@ -104,6 +119,7 @@ public class Spaceship implements Runnable{
             } catch (InterruptedException ex) {
                 //Irrelevante, no hacemos nada
             }
+            
         }
     }
 }

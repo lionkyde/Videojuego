@@ -15,7 +15,7 @@ import net.juanxxiii.j23gameengine.gui.JPGameScreen;
  *
  * @author dam1b
  */
-public abstract class Malo {
+public abstract class Malo  {
 
     BufferedImage imagen;
     protected int vida;
