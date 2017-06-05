@@ -5,6 +5,7 @@
  */
 package net.juanxxiii.j23gameengine.gui;
 
+import gameobjects.Bala;
 import gameobjects.Isaac;
 import gameobjects.Tanque;
 import java.awt.Color;
@@ -12,9 +13,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import net.juanxxiii.j23gameengine.util.SoundPlayer;
 
@@ -22,16 +26,20 @@ import net.juanxxiii.j23gameengine.util.SoundPlayer;
  *
  * @author Profesor
  */
-public class JPGameScreen extends javax.swing.JPanel implements Runnable {
-
+public class JPGameScreen extends javax.swing.JPanel implements Runnable,MouseListener {
+     
+    
+    
     BufferedImage bg;//Imagen de fondo
     Isaac nave;
     Tanque tanque;
-
+    Tanque tanque2;
+    Bala bala;
     /**
      * Creates new form JPGameScreen
      */
     public JPGameScreen() {
+        addMouseListener(this);
         initComponents();
         //Cargamos los recursos
         loadResources();
@@ -116,6 +124,8 @@ public class JPGameScreen extends javax.swing.JPanel implements Runnable {
         g2d.drawImage(nave.getNave(), nave.getxNave(), nave.getyNave(), null);
         //Pintamos los malos
         tanque.pintar(g2d);
+        tanque2.pintar(g2d);
+        bala.pintar(g2d);
     }
 
     /**
@@ -157,22 +167,62 @@ public class JPGameScreen extends javax.swing.JPanel implements Runnable {
             }
         }
     }
-    
     /**
      * Carga los recursos del videojuego
      */
     private void loadResources(){
         try {
+            ArrayList<Bala> b = new ArrayList();
             bg = ImageIO.read(JPGameScreen.class.getResourceAsStream("/assets/room1.png"));
             nave = new Isaac();
             new Thread(nave).start();
             
-            tanque = new Tanque("tanque.png",10,1,10,100,200);
+            tanque = new Tanque("tanque.png",10,1,10,150,250);
             new Thread(tanque).start();
+            Isaac isac = new Isaac();
+            int xi;
+            int yi;
+            xi = isac.getxNave();
+            yi = isac.getyNave();
+            bala = new Bala("BALA.png",100,200);
+            new Thread(bala).start();
+            
+            tanque2 = new Tanque("tanque.png",10,1,10,300,400);
+            new Thread(tanque2).start();
             
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int xx = e.getX();
+        int yy = e.getY();
+        System.err.println(xx+" "+yy);
+        
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

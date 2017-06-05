@@ -24,8 +24,7 @@ public class Tanque extends Malo implements Runnable {
     
     public Tanque(String nombreImagen, int vida, int velocidad, int damage, int x, int y) throws IOException {
         super(nombreImagen, vida, velocidad, damage, x, y);
-    x = 100;
-    y = 100;
+ 
     }
 
     Isaac isac = new Isaac();
@@ -46,7 +45,7 @@ public class Tanque extends Malo implements Runnable {
         
         xi = isac.getxNave();
         yi = isac.getyNave();
-                  System.err.println(xi+" "+yi);
+                //  System.err.println(xi+" "+yi);
             if (x < xi){
                 x++;
                 //System.err.println(xi+" "+x);
